@@ -42,7 +42,7 @@ export default function Sidebar({
           ☰
         </button>
       </div>
-
+      <div className="sidebar-divider" />
       {/* MAIN */}
       <div className="sidebar-section">
         {mainItems.map((item) => (

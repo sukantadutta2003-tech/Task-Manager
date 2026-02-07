@@ -163,3 +163,17 @@
 .sidebar.collapsed .sidebar-top {
   justify-content: center;
 }
+/* ── SIDEBAR DIVIDER (TaskFlow style) ── */
+
+.sidebar-divider {
+  height: 1px;
+  width: 100%;
+  background: var(--border);
+  margin: 8px 0 12px;
+}
+
+/* Adjust spacing when collapsed */
+.sidebar.collapsed .sidebar-divider {
+  margin: 8px auto 12px;
+  width: 40px;
+}
