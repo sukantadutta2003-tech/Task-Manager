@@ -141,5 +141,37 @@ body {
   color: white;
 }
 
+/* 🗑️ TASK DELETE BUTTON */
 
+.task-delete {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-delete:hover {
+  color: #ef4444; /* red on hover */
+}
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--text); /* default (light mode) */
+}
+
+/* Force white in dark mode */
+[data-theme="dark"] .hamburger-btn {
+  color: #ffffff;
+}
+
+/* Subtle hover (both modes) */
+.hamburger-btn:hover {
+  opacity: 0.85;
+}
 
