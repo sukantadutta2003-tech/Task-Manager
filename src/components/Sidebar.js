@@ -1,6 +1,4 @@
-import { useState } from "react";
 import {
-  FiSun,
   FiInbox,
   FiCalendar,
   FiClock,
@@ -11,52 +9,66 @@ import {
   FiBriefcase,
 } from "react-icons/fi";
 
-export default function Sidebar({ theme, toggleTheme }) {
-  const [dark, setDark] = useState(false);
-  const [open, setOpen] = useState(true);
+export default function Sidebar({
+  activeView,
+  setActiveView,
+}) {
+  const mainItems = [
+    { label: "Inbox", icon: <FiInbox /> },
+    { label: "Today", icon: <FiCalendar /> },
+    { label: "Scheduled", icon: <FiClock /> },
+    { label: "Filter", icon: <FiFilter /> },
+  ];
+
+  const customItems = [
+    { label: "Personal", icon: <FiUsers /> },
+    { label: "Family", icon: <FiUsers /> },
+    { label: "Shopping", icon: <FiShoppingBag /> },
+    { label: "Academics", icon: <FiBook /> },
+    { label: "Work", icon: <FiBriefcase /> },
+  ];
 
   return (
     <aside className="sidebar">
-      {/* SIDEBAR TOP ACTION */}
+      {/* TOP */}
       <div className="sidebar-top">
         <button className="hamburger-btn" aria-label="Toggle sidebar">
           ☰
         </button>
       </div>
 
-      {/* MAIN */}
+      {/* MAIN SECTION */}
       <div className="sidebar-section">
-        <div className="sidebar-item active">
-          <FiInbox /> Inbox
-        </div>
-        <div className="sidebar-item">
-          <FiCalendar /> Today
-        </div>
-        <div className="sidebar-item">
-          <FiClock /> Scheduled
-        </div>
-        <div className="sidebar-item">
-          <FiFilter /> Filter & Label
-        </div>
+        {mainItems.map((item) => (
+          <div
+            key={item.label}
+            className={`sidebar-item ${
+              activeView === item.label ? "active" : ""
+            }`}
+            onClick={() => setActiveView(item.label)}
+          >
+            {item.icon}
+            {item.label}
+          </div>
+        ))}
       </div>
 
+      {/* CUSTOM LISTS */}
       <div className="sidebar-section">
         <p className="sidebar-label">CUSTOM LISTS</p>
-        <div className="sidebar-item">
-          <FiUsers /> Personal
-        </div>
-        <div className="sidebar-item">
-          <FiUsers /> Family
-        </div>
-        <div className="sidebar-item">
-          <FiShoppingBag /> Shopping
-        </div>
-        <div className="sidebar-item">
-          <FiBook /> Academics
-        </div>
-        <div className="sidebar-item">
-          <FiBriefcase /> Work
-        </div>
+
+        {customItems.map((item) => (
+          <div
+            key={item.label}
+            className={`sidebar-item ${
+              activeView === item.label ? "active" : ""
+            }`}
+            onClick={() => setActiveView(item.label)}
+          >
+            {item.icon}
+            {item.label}
+          </div>
+        ))}
 
         <div className="sidebar-create">+ Create Custom List</div>
       </div>

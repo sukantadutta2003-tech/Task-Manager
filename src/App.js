@@ -11,6 +11,7 @@ function App() {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
+  const [activeView, setActiveView] = useState("Inbox");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -40,7 +41,12 @@ function App() {
 
   return (
     <div className="app">
-      <Sidebar theme={theme} toggleTheme={toggleTheme} />
+      <Sidebar
+        theme={theme}
+        toggleTheme={toggleTheme}
+        activeView={activeView}
+        setActiveView={setActiveView}
+      />
 
       <main className="main">
         <Header
