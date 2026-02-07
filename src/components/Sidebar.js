@@ -12,6 +12,8 @@ import {
 export default function Sidebar({
   activeView,
   setActiveView,
+  sidebarOpen,
+  setSidebarOpen,
 }) {
   const mainItems = [
     { label: "Inbox", icon: <FiInbox /> },
@@ -29,15 +31,19 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="sidebar">
-      {/* TOP */}
+    <aside className={`sidebar ${sidebarOpen ? "open" : "collapsed"}`}>
+      {/* TOP (HAMBURGER) */}
       <div className="sidebar-top">
-        <button className="hamburger-btn" aria-label="Toggle sidebar">
+        <button
+          className="hamburger-btn"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          aria-label="Toggle sidebar"
+        >
           ☰
         </button>
       </div>
 
-      {/* MAIN SECTION */}
+      {/* MAIN */}
       <div className="sidebar-section">
         {mainItems.map((item) => (
           <div
@@ -48,14 +54,16 @@ export default function Sidebar({
             onClick={() => setActiveView(item.label)}
           >
             {item.icon}
-            {item.label}
+            {sidebarOpen && item.label}
           </div>
         ))}
       </div>
 
       {/* CUSTOM LISTS */}
       <div className="sidebar-section">
-        <p className="sidebar-label">CUSTOM LISTS</p>
+        {sidebarOpen && (
+          <p className="sidebar-label">CUSTOM LISTS</p>
+        )}
 
         {customItems.map((item) => (
           <div
@@ -66,11 +74,13 @@ export default function Sidebar({
             onClick={() => setActiveView(item.label)}
           >
             {item.icon}
-            {item.label}
+            {sidebarOpen && item.label}
           </div>
         ))}
 
-        <div className="sidebar-create">+ Create Custom List</div>
+        {sidebarOpen && (
+          <div className="sidebar-create">+ Create Custom List</div>
+        )}
       </div>
     </aside>
   );

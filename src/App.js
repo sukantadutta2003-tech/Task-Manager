@@ -13,6 +13,9 @@ function App() {
   const [search, setSearch] = useState("");
   const [activeView, setActiveView] = useState("Inbox");
 
+  // 🔥 Sidebar state
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -36,16 +39,16 @@ function App() {
   };
 
   const filteredTasks = tasks.filter((task) =>
-    task.toLowerCase().includes(search.toLowerCase()),
+    task.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="app">
       <Sidebar
-        theme={theme}
-        toggleTheme={toggleTheme}
         activeView={activeView}
         setActiveView={setActiveView}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
       />
 
       <main className="main">
@@ -58,7 +61,7 @@ function App() {
 
         <div className="task-card">
           <div className="task-card-header">
-            <h2>All Tasks</h2>
+            <h2>{activeView}</h2>
             <button
               className="add-btn"
               onClick={() => setShowInput(!showInput)}

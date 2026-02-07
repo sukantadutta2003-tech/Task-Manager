@@ -21,6 +21,7 @@ body {
   background: var(--card);
   border-right: 1px solid var(--border);
   padding: 16px;
+
 }
 
 /* Header (TaskFlow + theme toggle) */
@@ -252,5 +253,40 @@ body {
 
 .sidebar {
   position: relative; 
+}
+/* === COLLAPSED SIDEBAR FIXES (GMAIL STYLE) === */
+
+.sidebar {
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  width: 240px;
+}
+
+.sidebar.collapsed {
+  width: 72px; /* Gmail-like width */
+}
+
+/* Keep icons SAME size */
+.sidebar-item svg {
+  font-size: 18px; /* same in open + collapsed */
+}
+
+/* Center icons when collapsed */
+.sidebar.collapsed .sidebar-item {
+  justify-content: center;
+  padding: 12px 0;
+}
+.sidebar-top {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 12px;
+}
+
+/* Center hamburger when collapsed */
+.sidebar.collapsed .sidebar-top {
+  justify-content: center;
 }
 
