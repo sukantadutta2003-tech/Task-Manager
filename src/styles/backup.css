@@ -36,10 +36,9 @@ body {
   margin-bottom: 8px;
 }
 
-/* Hamburger (same rail as icons, never moves) */
 .hamburger-btn {
   position: absolute;
-  left: 20px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 18px;
@@ -63,13 +62,19 @@ body {
 /* ================== SECTIONS ================== */
 .sidebar-section {
   margin-top: 12px;
+  overflow: hidden; /* 🔒 stops reflow glitch */
 }
 
+/* ================== TITLES ================== */
 .sidebar-title {
   font-size: 12px;
   color: var(--muted);
+  padding-left: 56px;
   margin-bottom: 8px;
-  padding-left: 56px; /* aligns with text */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .sidebar.collapsed .sidebar-title {
@@ -77,13 +82,12 @@ body {
 }
 
 /* ================== SIDEBAR ITEMS ================== */
-/* Gmail-style fixed icon rail */
 .sidebar-item {
   position: relative;
   display: flex;
   align-items: center;
-  height: 40px;
-  padding-left: 56px; /* fixed icon column */
+  height: 40px;              /* 🔒 fixed height */
+  padding-left: 56px;
   padding-right: 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -91,7 +95,7 @@ body {
   white-space: nowrap;
 }
 
-/* ICON — fixed position, never moves */
+/* ICON — fixed column (never moves) */
 .sidebar-item svg {
   position: absolute;
   left: 20px;
@@ -100,9 +104,11 @@ body {
   font-size: 18px;
 }
 
-/* TEXT — animated, no layout reflow */
+/* LABEL — animated only */
 .sidebar-item span {
+  display: inline-block;
   transition: opacity 0.18s ease, transform 0.18s ease;
+  transform-origin: left center;
 }
 
 /* Hover & active */
@@ -116,11 +122,38 @@ body {
 }
 
 /* ================== COLLAPSED (GMAIL BEHAVIOR) ================== */
-/* Icons stay fixed, text fades/slides */
 .sidebar.collapsed .sidebar-item span {
   opacity: 0;
   transform: translateX(-8px);
   pointer-events: none;
+}
+
+/* ================== CUSTOM LISTS (SMOOTH, NO JUMP) ================== */
+.custom-lists {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease;
+}
+
+.custom-lists.open {
+  max-height: 500px; /* safe upper bound */
+  opacity: 1;
+}
+
+/* Create custom list */
+.sidebar-create {
+  padding-left: 56px;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.sidebar-create:hover {
+  color: var(--accent);
 }
 
 /* ================== MAIN CONTENT (UNCHANGED) ================== */
@@ -152,7 +185,16 @@ body {
   background: var(--card);
   color: var(--text);
 }
-
+/* ================= ADD TASK INPUT ================= */
+.task-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+}
 .topbar-right {
   display: flex;
   align-items: center;

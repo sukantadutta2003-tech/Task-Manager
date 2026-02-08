@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FiInbox,
   FiCalendar,
@@ -7,6 +8,8 @@ import {
   FiShoppingBag,
   FiBook,
   FiBriefcase,
+  FiChevronDown,
+  FiChevronUp,
 } from "react-icons/fi";
 
 export default function Sidebar({
@@ -15,6 +18,8 @@ export default function Sidebar({
   sidebarOpen,
   setSidebarOpen,
 }) {
+  const [customOpen, setCustomOpen] = useState(true);
+
   const mainItems = [
     { label: "Inbox", icon: <FiInbox /> },
     { label: "Today", icon: <FiCalendar /> },
@@ -32,17 +37,18 @@ export default function Sidebar({
 
   return (
     <aside className={`sidebar ${sidebarOpen ? "open" : "collapsed"}`}>
-      {/* TOP (HAMBURGER) */}
+      {/* TOP */}
       <div className="sidebar-top">
         <button
           className="hamburger-btn"
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          aria-label="Toggle sidebar"
         >
           ☰
         </button>
       </div>
+
       <div className="sidebar-divider" />
+
       {/* MAIN */}
       <div className="sidebar-section">
         {mainItems.map((item) => (
@@ -54,7 +60,7 @@ export default function Sidebar({
             onClick={() => setActiveView(item.label)}
           >
             {item.icon}
-            {sidebarOpen && item.label}
+            <span>{item.label}</span>
           </div>
         ))}
       </div>
@@ -62,25 +68,37 @@ export default function Sidebar({
       {/* CUSTOM LISTS */}
       <div className="sidebar-section">
         {sidebarOpen && (
-          <p className="sidebar-label">CUSTOM LISTS</p>
-        )}
-
-        {customItems.map((item) => (
           <div
-            key={item.label}
-            className={`sidebar-item ${
-              activeView === item.label ? "active" : ""
-            }`}
-            onClick={() => setActiveView(item.label)}
+            className="sidebar-title toggle"
+            onClick={() => setCustomOpen(!customOpen)}
           >
-            {item.icon}
-            {sidebarOpen && item.label}
+            CUSTOM LISTS
+            {customOpen ? <FiChevronUp /> : <FiChevronDown />}
           </div>
-        ))}
-
-        {sidebarOpen && (
-          <div className="sidebar-create">+ Create Custom List</div>
         )}
+
+        <div
+          className={`custom-lists ${
+            customOpen && sidebarOpen ? "open" : ""
+          }`}
+        >
+          {customItems.map((item) => (
+            <div
+              key={item.label}
+              className={`sidebar-item ${
+                activeView === item.label ? "active" : ""
+              }`}
+              onClick={() => setActiveView(item.label)}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </div>
+          ))}
+
+          {sidebarOpen && (
+            <div className="sidebar-create">+ Create Custom List</div>
+          )}
+        </div>
       </div>
     </aside>
   );
