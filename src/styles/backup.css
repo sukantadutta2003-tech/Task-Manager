@@ -1,0 +1,241 @@
+/* ================== GLOBAL ================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+  width: 240px;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  padding: 16px 8px;
+  overflow: hidden;
+  transition: width 0.25s ease;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+}
+
+/* ================== SIDEBAR TOP ================== */
+.sidebar-top {
+  position: relative;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+/* Hamburger (same rail as icons, never moves) */
+.hamburger-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+[data-theme="dark"] .hamburger-btn {
+  color: #ffffff;
+}
+
+/* ================== DIVIDER ================== */
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0 12px;
+}
+
+/* ================== SECTIONS ================== */
+.sidebar-section {
+  margin-top: 12px;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+  padding-left: 56px; /* aligns with text */
+}
+
+.sidebar.collapsed .sidebar-title {
+  display: none;
+}
+
+/* ================== SIDEBAR ITEMS ================== */
+/* Gmail-style fixed icon rail */
+.sidebar-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding-left: 56px; /* fixed icon column */
+  padding-right: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ICON — fixed position, never moves */
+.sidebar-item svg {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+/* TEXT — animated, no layout reflow */
+.sidebar-item span {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* Hover & active */
+.sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-item.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* ================== COLLAPSED (GMAIL BEHAVIOR) ================== */
+/* Icons stay fixed, text fades/slides */
+.sidebar.collapsed .sidebar-item span {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}
+
+/* ================== MAIN CONTENT (UNCHANGED) ================== */
+.main {
+  flex: 1;
+  padding: 24px;
+  background: var(--bg);
+}
+
+/* ================== TOP BAR (UNCHANGED) ================== */
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+}
+
+.topbar-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.topbar-search {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ================== CARDS (UNCHANGED) ================== */
+.task-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ================== BUTTONS ================== */
+.add-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(79, 70, 229, 0.12);
+  color: var(--accent);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* ================== TASKS (UNCHANGED) ================== */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  cursor: pointer;
+}
+
+.task-checkbox.checked {
+  background: var(--accent);
+}
+
+.task-text {
+  font-size: 14px;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task-delete {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.task-delete:hover {
+  color: #ef4444;
+}
+
+.task-empty {
+  margin-top: 8px;
+  color: var(--muted);
+}
