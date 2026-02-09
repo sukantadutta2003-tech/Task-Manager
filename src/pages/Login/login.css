@@ -49,8 +49,8 @@
 /* ================= BUTTONS ================= */
 .login-page button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background: #ff4b2b;
+  border: 1px solid #fdfdfd;
+  background: linear-gradient(to right, #2b2fff, #ff416c);
   color: #fff;
   font-size: 12px;
   font-weight: bold;
@@ -171,7 +171,7 @@
 }
 
 .login-page .overlay {
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #2b2fff, #ff416c);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

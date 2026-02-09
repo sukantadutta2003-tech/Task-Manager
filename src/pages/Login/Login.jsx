@@ -24,9 +24,9 @@ function Login() {
           <form>
             <h1>Create Account</h1>
             <div className="social-container">
-              <a href="#" className="social"><i className="fa-brands fa-facebook"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-google-plus"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-linkedin"></i></a>
+              <a href="#" className="social"><i className="fa-brands fa-facebook-f"></i></a>
+              <a href="#" className="social"><i className="fa-brands fa-google"></i></a>
+              <a href="#" className="social"><i className="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your email</span>
             <input type="text" placeholder="Name" />
@@ -41,9 +41,9 @@ function Login() {
           <form>
             <h1>Sign in</h1>
             <div className="social-container">
-              <a href="#" className="social"><i className="fa-brands fa-facebook"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-google-plus"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-linkedin"></i></a>
+              <a href="#" className="social"><i className="fa-brands fa-facebook-f"></i></a>
+              <a href="#" className="social"><i className="fa-brands fa-google"></i></a>
+              <a href="#" className="social"><i className="fa-brands fa-linkedin-in"></i></a>
             </div>
             <span>or use your account</span>
             <input type="email" placeholder="Email" />
@@ -58,13 +58,13 @@ function Login() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back</h1>
-              <p>To keep connected please login</p>
+              <p>Already have an account? <br/>Login here</p>
               <button className="ghost" id="signIn">Sign In</button>
             </div>
 
             <div className="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your details and start journey</p>
+              <h1>Don't have an account?</h1>
+              <p>Register here to get started</p>
               <button className="ghost" id="signUp">Sign Up</button>
             </div>
           </div>
