@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import "./login.css";
+import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
+
 
 function Login() {
   useEffect(() => {
@@ -24,9 +26,9 @@ function Login() {
           <form>
             <h1>Create Account</h1>
             <div className="social-container">
-              <a href="#" className="social"><i className="fa-brands fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-google"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" className="social"><FaFacebookF /></a>
+              <a href="#" className="social"><FaGoogle /></a>
+              <a href="#" className="social"><FaLinkedinIn /></a>
             </div>
             <span>or use your email</span>
             <input type="text" placeholder="Name" />
@@ -41,9 +43,9 @@ function Login() {
           <form>
             <h1>Sign in</h1>
             <div className="social-container">
-              <a href="#" className="social"><i className="fa-brands fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-google"></i></a>
-              <a href="#" className="social"><i className="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" className="social"><FaFacebookF /></a>
+              <a href="#" className="social"><FaGoogle /></a>
+              <a href="#" className="social"><FaLinkedinIn /></a>
             </div>
             <span>or use your account</span>
             <input type="email" placeholder="Email" />
