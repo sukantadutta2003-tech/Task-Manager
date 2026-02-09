@@ -290,5 +290,5 @@ body {
   font-size: 20px;
 }
 .theme-toggle-btn:hover {
-  background: rgba(79, 70, 229, 0.12);
+  background: var(--accent);
 }
