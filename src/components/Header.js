@@ -1,10 +1,24 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Header({ theme, toggleTheme, search, setSearch }) {
+  const navigate = useNavigate();
+
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <span className="topbar-title">TaskFlow</span>
+        <button
+          className="topbar-title"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: "inherit",
+          }}
+          onClick={() => navigate("/login")}
+        >
+          Login
+        </button>
       </div>
 
       <div className="topbar-center">
@@ -26,3 +40,4 @@ function Header({ theme, toggleTheme, search, setSearch }) {
 }
 
 export default Header;
+
