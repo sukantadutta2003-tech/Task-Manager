@@ -7,7 +7,6 @@ import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
 
-
 function App() {
   const [theme, setTheme] = useState("light");
   const [tasks, setTasks] = useState([]);
@@ -46,121 +45,127 @@ function App() {
   };
 
   const filteredTasks = tasks.filter((task) =>
-    task.toLowerCase().includes(search.toLowerCase())
+    task.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
-  <BrowserRouter>
-    <Routes>
+    <BrowserRouter>
+      <Routes>
+        {/* LOGIN PAGE */}
+        <Route path="/login" element={<Login />} />
 
-      {/* LOGIN PAGE */}
-      <Route path="/login" element={<Login />} />
-
-      {/* MAIN APP — YOUR ORIGINAL LAYOUT (UNCHANGED) */}
-      <Route
-        path="/"
-        element={
-          <>
-            {/* 👇 EVERYTHING BELOW IS YOUR OLD JSX — NOT MODIFIED */}
-            <div className="app">
-              <Sidebar
-                activeView={activeView}
-                setActiveView={setActiveView}
+        {/* MAIN APP — YOUR ORIGINAL LAYOUT (UNCHANGED) */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Header
+                theme={theme}
+                toggleTheme={() =>
+                  setTheme((prev) => (prev === "light" ? "dark" : "light"))
+                }
+                search={search}
+                setSearch={setSearch}
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
               />
-
-              <main className="main">
-                <Header
-                  theme={theme}
-                  toggleTheme={() =>
-                    setTheme((prev) =>
-                      prev === "light" ? "dark" : "light"
-                    )
-                  }
-                  search={search}
-                  setSearch={setSearch}
+              {/* 👇 EVERYTHING BELOW IS YOUR OLD JSX — NOT MODIFIED */}
+              <div className="app">
+                <Sidebar
+                  activeView={activeView}
+                  setActiveView={setActiveView}
+                  sidebarOpen={sidebarOpen}
+                  setSidebarOpen={setSidebarOpen}
                 />
 
-                {/* ACTIVE TASKS */}
-                <div className="task-card">
-                  <div className="task-card-header">
-                    <h2>{activeView}</h2>
-                    <button
-                      className="add-btn"
-                      onClick={() => setShowInput(!showInput)}
-                    >
-                      +
-                    </button>
-                  </div>
+                <main className="main">
+                  {/* <Header
+                    theme={theme}
+                    toggleTheme={() =>
+                      setTheme((prev) => (prev === "light" ? "dark" : "light"))
+                    }
+                    search={search}
+                    setSearch={setSearch}
+                  /> */}
 
-                  {showInput && (
-                    <input
-                      className="task-input"
-                      placeholder="Add new task..."
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      onKeyDown={handleAddTask}
-                      autoFocus
-                    />
-                  )}
+                  {/* ACTIVE TASKS */}
+                  <div className="task-card">
+                    <div className="task-card-header">
+                      <h2>{activeView}</h2>
+                      <button
+                        className="add-btn"
+                        onClick={() => setShowInput(!showInput)}
+                      >
+                        +
+                      </button>
+                    </div>
 
-                  {filteredTasks.length === 0 && (
-                    <p className="task-empty">No tasks found</p>
-                  )}
-
-                  {filteredTasks.map((task, index) => (
-                    <div key={index} className="task-item">
-                      <span
-                        className="task-checkbox"
-                        onClick={() => markCompleted(index)}
+                    {showInput && (
+                      <input
+                        className="task-input"
+                        placeholder="Add new task..."
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={handleAddTask}
+                        autoFocus
                       />
-                      <span className="task-text">{task}</span>
+                    )}
 
-                      <button
-                        className="task-delete"
-                        onClick={() => deleteTask(index)}
-                      >
-                        <FiTrash2 />
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                    {filteredTasks.length === 0 && (
+                      <p className="task-empty">No tasks found</p>
+                    )}
 
-                {/* COMPLETED TASKS */}
-                <div className="task-card">
-                  <div className="task-card-header">
-                    <h2>Completed Tasks</h2>
+                    {filteredTasks.map((task, index) => (
+                      <div key={index} className="task-item">
+                        <span
+                          className="task-checkbox"
+                          onClick={() => markCompleted(index)}
+                        />
+                        <span className="task-text">{task}</span>
+
+                        <button
+                          className="task-delete"
+                          onClick={() => deleteTask(index)}
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
                   </div>
 
-                  {completed.length === 0 && (
-                    <p className="task-empty">No completed tasks</p>
-                  )}
-
-                  {completed.map((task, index) => (
-                    <div key={index} className="task-item completed">
-                      <span className="task-checkbox checked" />
-                      <span className="task-text">{task}</span>
-
-                      <button
-                        className="task-delete"
-                        onClick={() => deleteCompletedTask(index)}
-                      >
-                        <FiTrash2 />
-                      </button>
+                  {/* COMPLETED TASKS */}
+                  <div className="task-card">
+                    <div className="task-card-header">
+                      <h2>Completed Tasks</h2>
                     </div>
-                  ))}
-                </div>
-              </main>
-            </div>
-            {/* 👆 END OF YOUR ORIGINAL LAYOUT */}
-          </>
-        }
-      />
 
-    </Routes>
-  </BrowserRouter>
-);
+                    {completed.length === 0 && (
+                      <p className="task-empty">No completed tasks</p>
+                    )}
+
+                    {completed.map((task, index) => (
+                      <div key={index} className="task-item completed">
+                        <span className="task-checkbox checked" />
+                        <span className="task-text">{task}</span>
+
+                        <button
+                          className="task-delete"
+                          onClick={() => deleteCompletedTask(index)}
+                        >
+                          <FiTrash2 />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </main>
+              </div>
+              {/* 👆 END OF YOUR ORIGINAL LAYOUT */}
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

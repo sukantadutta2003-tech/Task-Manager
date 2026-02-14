@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router-dom";
 
-function Header({ search, setSearch }) {
+function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
   const navigate = useNavigate();
 
   return (
     <header className="topbar">
-      
       {/* LEFT — Logo */}
       <div className="topbar-left">
+        <button
+          className="hamburger-btn"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          ☰
+        </button>
         <span className="topbar-logo">TaskLoom</span>
       </div>
 
@@ -23,10 +28,7 @@ function Header({ search, setSearch }) {
 
       {/* RIGHT — Login Button */}
       <div className="topbar-right">
-        <button
-          className="login-btn"
-          onClick={() => navigate("/login")}
-        >
+        <button className="login-btn" onClick={() => navigate("/login")}>
           Login
         </button>
       </div>

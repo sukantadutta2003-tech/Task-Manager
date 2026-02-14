@@ -38,7 +38,7 @@ export default function Sidebar({
   return (
     <aside className={`sidebar ${sidebarOpen ? "open" : "collapsed"}`}>
       {/* TOP */}
-      <div className="sidebar-top">
+      {/* <div className="sidebar-top">
         <button
           className="hamburger-btn"
           onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -47,7 +47,7 @@ export default function Sidebar({
         </button>
       </div>
 
-      <div className="sidebar-divider" />
+      <div className="sidebar-divider" /> */}
 
       {/* MAIN */}
       <div className="sidebar-section">

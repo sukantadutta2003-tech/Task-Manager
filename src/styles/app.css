@@ -18,8 +18,8 @@ body {
 /* ================== SIDEBAR ================== */
 .sidebar {
   width: 240px;
-  background: var(--card);
-  border-right: 1px solid var(--border);
+  background: var(--bg);
+  /* border-right: 1px solid var(--border); */
   padding: 8px 8px;
   overflow: hidden;
   transition: width 0.25s ease;
@@ -37,7 +37,6 @@ body {
 }
 
 .hamburger-btn {
-  position: absolute;
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
@@ -159,8 +158,9 @@ body {
 /* ================== MAIN CONTENT (UNCHANGED) ================== */
 .main {
   flex: 1;
-  padding: 0px 24px;
-  background: var(--bg);
+  padding: 0px 0px;
+  background: var(--card);
+  border-radius: 16px;
 }
 
 .topbar {
@@ -295,9 +295,10 @@ body {
 
 /* Logo (like YouTube text) */
 .topbar-logo {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 600;
   letter-spacing: 0.5px;
+  padding: 0px 16px;
 }
 
 /* Center search stays same */
@@ -320,4 +321,17 @@ body {
 
 .login-btn:hover {
   background: rgba(0,0,0,0.05);
+}
+/* HEADER FULL WIDTH FIX */
+.topbar {
+  width: 100%;
+  padding: 12px 20px;
+  /* border-bottom: 1px solid var(--border); */
+  background: var(--bg);
+}
+
+/* Ensure layout stacks correctly */
+body > div {
+  display: flex;
+  flex-direction: column;
 }
