@@ -74,15 +74,6 @@ function App() {
                 />
 
                 <main className="main">
-                  {/* <Header
-                    theme={theme}
-                    toggleTheme={() =>
-                      setTheme((prev) => (prev === "light" ? "dark" : "light"))
-                    }
-                    search={search}
-                    setSearch={setSearch}
-                  /> */}
-
                   {/* ACTIVE TASKS */}
                   <div className="task-card">
                     <div className="task-card-header">

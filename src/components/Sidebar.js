@@ -37,6 +37,7 @@ export default function Sidebar({
 
   return (
     <aside className={`sidebar ${sidebarOpen ? "open" : "collapsed"}`}>
+      <div className="sidebar-divider" />
       {/* MAIN */}
       <div className="sidebar-section">
         {mainItems.map((item) => (
@@ -52,6 +53,7 @@ export default function Sidebar({
           </div>
         ))}
       </div>
+      <div className="sidebar-divider" />
 
       {/* CUSTOM LISTS */}
       <div className="sidebar-section">
