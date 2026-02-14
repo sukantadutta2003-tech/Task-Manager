@@ -75,6 +75,9 @@ function App() {
 
                 <main className="main">
                   {/* ACTIVE TASKS */}
+                  <div className="task-header">
+                    <h1>{activeView}</h1>
+                  </div>
                   <div className="task-card">
                     <div className="task-card-header">
                       <h2>{activeView}</h2>
@@ -119,12 +122,12 @@ function App() {
                     ))}
                   </div>
 
+                  <div className="task-header">
+                    <h2>Completed Tasks</h2>
+                  </div>
+
                   {/* COMPLETED TASKS */}
                   <div className="task-card">
-                    <div className="task-card-header">
-                      <h2>Completed Tasks</h2>
-                    </div>
-
                     {completed.length === 0 && (
                       <p className="task-empty">No completed tasks</p>
                     )}

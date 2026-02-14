@@ -334,5 +334,8 @@ body {
   background: var(--bg);
 }
 
-/* Ensure layout stacks correctly */
+.task-header {
+  padding: 0px 20px;
+  margin: 20px 0px;
+}
 
