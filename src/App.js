@@ -60,16 +60,11 @@ function App() {
           element={
             <>
               <Header
-                theme={theme}
-                toggleTheme={() =>
-                  setTheme((prev) => (prev === "light" ? "dark" : "light"))
-                }
                 search={search}
                 setSearch={setSearch}
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
               />
-              {/* 👇 EVERYTHING BELOW IS YOUR OLD JSX — NOT MODIFIED */}
               <div className="app">
                 <Sidebar
                   activeView={activeView}
