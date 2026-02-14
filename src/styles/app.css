@@ -163,13 +163,12 @@ body {
   background: var(--bg);
 }
 
-/* ================== TOP BAR (UNCHANGED) ================== */
 .topbar {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 9px 4px;
   gap: 16px;
-  padding: 12px 16px;
 }
 
 .topbar-title {
@@ -178,7 +177,7 @@ body {
 }
 
 .topbar-search {
-  width: 100%;
+  width: 500px;
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -187,7 +186,7 @@ body {
 }
 /* ================= ADD TASK INPUT ================= */
 .task-input {
-  width: 100%;
+  width: 250px;
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -293,12 +292,6 @@ body {
   background: var(--accent);
 }
 /* Topbar Layout */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px;
-}
 
 /* Logo (like YouTube text) */
 .topbar-logo {
@@ -311,7 +304,7 @@ body {
 .topbar-center {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-left;
 }
 
 /* Right login button */
