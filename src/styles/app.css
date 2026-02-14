@@ -9,6 +9,10 @@ body {
   background: var(--bg);
   color: var(--text);
 }
+/* body > div {
+  display: flex;
+  flex-direction: column;
+} */
 
 .app {
   display: flex;
@@ -39,8 +43,8 @@ body {
 .hamburger-btn {
   left: 14px;
   top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
+  /* transform: translateY(-50%); */
+  font-size: 22px;
   background: none;
   border: none;
   cursor: pointer;
@@ -295,10 +299,10 @@ body {
 
 /* Logo (like YouTube text) */
 .topbar-logo {
-  font-size: 25px;
+  font-size: 23px;
   font-weight: 600;
   letter-spacing: 0.5px;
-  padding: 0px 16px;
+  padding: 0px 13px;
 }
 
 /* Center search stays same */
@@ -331,7 +335,4 @@ body {
 }
 
 /* Ensure layout stacks correctly */
-body > div {
-  display: flex;
-  flex-direction: column;
-}
+
