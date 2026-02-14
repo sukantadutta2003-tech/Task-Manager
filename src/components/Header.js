@@ -1,26 +1,17 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function Header({ theme, toggleTheme, search, setSearch }) {
+function Header({ search, setSearch }) {
   const navigate = useNavigate();
 
   return (
     <header className="topbar">
+      
+      {/* LEFT — Logo */}
       <div className="topbar-left">
-        <button
-          className="topbar-title"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: "inherit",
-          }}
-          onClick={() => navigate("/login")}
-        >
-          Login
-        </button>
+        <span className="topbar-logo">TaskLoom</span>
       </div>
 
+      {/* CENTER — Search */}
       <div className="topbar-center">
         <input
           className="topbar-search"
@@ -30,9 +21,13 @@ function Header({ theme, toggleTheme, search, setSearch }) {
         />
       </div>
 
+      {/* RIGHT — Login Button */}
       <div className="topbar-right">
-        <button className="theme-toggle-btn" onClick={toggleTheme}>
-          {theme === "light" ? "🌙" : "☀️"}
+        <button
+          className="login-btn"
+          onClick={() => navigate("/login")}
+        >
+          Login
         </button>
       </div>
     </header>
@@ -40,4 +35,3 @@ function Header({ theme, toggleTheme, search, setSearch }) {
 }
 
 export default Header;
-
