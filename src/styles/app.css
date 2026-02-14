@@ -20,7 +20,7 @@ body {
   width: 240px;
   background: var(--card);
   border-right: 1px solid var(--border);
-  padding: 16px 8px;
+  padding: 8px 8px;
   overflow: hidden;
   transition: width 0.25s ease;
 }
@@ -304,7 +304,7 @@ body {
 .topbar-center {
   flex: 1;
   display: flex;
-  justify-content: flex-left;
+  justify-content: center;
 }
 
 /* Right login button */
