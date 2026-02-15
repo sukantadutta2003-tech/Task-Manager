@@ -197,6 +197,7 @@ body {
   background: var(--card);
   color: var(--text);
   font-size: 14px;
+  margin-top: 8px;
 }
 .topbar-right {
   display: flex;
@@ -209,7 +210,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
-  margin-bottom: 16px;
+  margin: 16px;
 }
 
 .task-card-header {
@@ -220,19 +221,17 @@ body {
 
 /* ================== BUTTONS ================== */
 .add-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(79, 70, 229, 0.12);
-  color: var(--accent);
-  font-size: 22px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  padding: 5px 10px;
   cursor: pointer;
 }
 
 .add-btn:hover {
-  background: var(--accent);
-  color: #ffffff;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* ================== TASKS (UNCHANGED) ================== */

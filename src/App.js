@@ -80,12 +80,12 @@ function App() {
                   </div>
                   <div className="task-card">
                     <div className="task-card-header">
-                      <h2>{activeView}</h2>
+                      {/* <h2>{activeView}</h2> */}
                       <button
                         className="add-btn"
                         onClick={() => setShowInput(!showInput)}
                       >
-                        +
+                        Add Task
                       </button>
                     </div>
 
