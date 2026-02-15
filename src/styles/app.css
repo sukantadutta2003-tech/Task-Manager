@@ -266,11 +266,6 @@ body {
   font-size: 14px;
 }
 
-.task-item.completed .task-text {
-  text-decoration: line-through;
-  color: var(--muted);
-}
-
 .task-delete {
   margin-left: auto;
   background: none;
