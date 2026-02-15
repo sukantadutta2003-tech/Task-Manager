@@ -68,32 +68,6 @@ It allows users to manage daily tasks with a clean UI, dark/light mode support, 
 
 ---
 
-## 📂 Project Structure
-
-frontend/
-│
-├── public/
-│ └── index.html
-│
-├── src/
-│ ├── components/
-│ │ ├── Sidebar.js
-│ │ ├── Header.js
-│ │
-│ ├── pages/
-│ │ └── Login/
-│ │ ├── Login.jsx
-│ │ └── login.css
-│ │
-│ ├── styles/
-│ │ ├── app.css
-│ │ └── theme.css
-│ │
-│ ├── App.js
-│ └── index.js
-│
-└── package.json
-
 #🚀 How to Run Locally
 
 Follow these steps to run the project on your local machine.
@@ -125,43 +99,30 @@ Once the server starts, open:
 ```bash
 http://localhost:3000
 ```
+---
 
+## 🛠 Requirements
+- Node.js (v16+ recommended)
+- npm or yarn
+- Modern browser (Chrome, Edge, Firefox)
 
+---
 
+🎯 Future Improvements
 
+- Add more interesting features
+- Clean UI
+- AI ChatBox
 
+---
 
+📜 License
 
+This project is open-source and free to use for educational purposes.
 
+---
 
+👨‍💻 Author
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Sukanta Dutta
+Aspiring Full Stack & Software Developer
