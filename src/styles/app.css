@@ -116,12 +116,12 @@ body {
 
 /* Hover & active */
 .sidebar-item:hover {
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-item.active {
-  background: var(--accent);
-  color: #ffffff;
+  background: rgba(0, 0, 0, 0.15);
+  /* color: #ffffff; */
 }
 
 /* ================== COLLAPSED (GMAIL BEHAVIOR) ================== */
@@ -254,12 +254,12 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 2px solid var(--accent);
+  border: 1px solid #0cbd01;
   cursor: pointer;
 }
 
 .task-checkbox.checked {
-  background: var(--accent);
+  background: #0cbd01;
 }
 
 .task-text {
