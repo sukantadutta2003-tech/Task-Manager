@@ -1,9 +1,20 @@
-# 🚀 TaskFlow - React Task Management App
+# 🚀 TaskLoom - React Task Management App
 
-TaskFlow is a modern task management web application built using React.  
+TaskLoom is a modern task management web application built using React.  
 It allows users to manage daily tasks with a clean UI, dark/light mode support, and a separate animated login page.
 
 ---
+## Main Page
+
+<p align="center">
+  <img src="Main_page.png" width="600">
+</p>
+
+## Login Page
+
+<p align="center">
+  <img src="Login_page.png" width="600">
+</p>
 
 ## ✨ Features
 
@@ -83,6 +94,37 @@ frontend/
 │
 └── package.json
 
+#🚀 How to Run Locally
+
+Follow these steps to run the project on your local machine.
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/YOUR_USERNAME/taskloom.git
+cd taskloom
+```
+
+### 2️⃣ Install dependencies
+
+Make sure you have Node.js (v16 or higher) installed.
+
+```bash
+npm install
+```
+
+### 3️⃣ Start the development server
+
+```bash
+npm start
+```
+
+### 4️⃣ Open in browser
+
+Once the server starts, open:
+
+```bash
+http://localhost:3000
+```
 
 
 
