@@ -275,6 +275,8 @@ body {
 .task-text {
   font-size: 14px;
   word-break: break-word;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .task-delete {
