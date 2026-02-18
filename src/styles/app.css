@@ -347,3 +347,15 @@ body {
   padding: 0px 20px;
   margin: 20px 0px;
 }
+.task-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-card::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.task-card::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
