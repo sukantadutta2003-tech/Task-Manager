@@ -74,7 +74,7 @@ Follow these steps to run the project on your local machine.
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/taskloom.git
+git clone https://github.com/sukantadutta2003-tech/taskloom.git
 cd taskloom
 ```
 
