@@ -1,0 +1,283 @@
+/* ================== GLOBAL ================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ================== SIDEBAR ================== */
+.sidebar {
+  width: 240px;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  padding: 16px 8px;
+  overflow: hidden;
+  transition: width 0.25s ease;
+}
+
+.sidebar.collapsed {
+  width: 72px;
+}
+
+/* ================== SIDEBAR TOP ================== */
+.sidebar-top {
+  position: relative;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.hamburger-btn {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+[data-theme="dark"] .hamburger-btn {
+  color: #ffffff;
+}
+
+/* ================== DIVIDER ================== */
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0 12px;
+}
+
+/* ================== SECTIONS ================== */
+.sidebar-section {
+  margin-top: 12px;
+  overflow: hidden; /* 🔒 stops reflow glitch */
+}
+
+/* ================== TITLES ================== */
+.sidebar-title {
+  font-size: 12px;
+  color: var(--muted);
+  padding-left: 56px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sidebar.collapsed .sidebar-title {
+  display: none;
+}
+
+/* ================== SIDEBAR ITEMS ================== */
+.sidebar-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 40px;              /* 🔒 fixed height */
+  padding-left: 56px;
+  padding-right: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ICON — fixed column (never moves) */
+.sidebar-item svg {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+/* LABEL — animated only */
+.sidebar-item span {
+  display: inline-block;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  transform-origin: left center;
+}
+
+/* Hover & active */
+.sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-item.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* ================== COLLAPSED (GMAIL BEHAVIOR) ================== */
+.sidebar.collapsed .sidebar-item span {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+}
+
+/* ================== CUSTOM LISTS (SMOOTH, NO JUMP) ================== */
+.custom-lists {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease;
+}
+
+.custom-lists.open {
+  max-height: 500px; /* safe upper bound */
+  opacity: 1;
+}
+
+/* Create custom list */
+.sidebar-create {
+  padding-left: 56px;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.sidebar-create:hover {
+  color: var(--accent);
+}
+
+/* ================== MAIN CONTENT (UNCHANGED) ================== */
+.main {
+  flex: 1;
+  padding: 24px;
+  background: var(--bg);
+}
+
+/* ================== TOP BAR (UNCHANGED) ================== */
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+}
+
+.topbar-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.topbar-search {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+}
+/* ================= ADD TASK INPUT ================= */
+.task-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ================== CARDS (UNCHANGED) ================== */
+.task-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ================== BUTTONS ================== */
+.add-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(79, 70, 229, 0.12);
+  color: var(--accent);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* ================== TASKS (UNCHANGED) ================== */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  cursor: pointer;
+}
+
+.task-checkbox.checked {
+  background: var(--accent);
+}
+
+.task-text {
+  font-size: 14px;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task-delete {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.task-delete:hover {
+  color: #ef4444;
+}
+
+.task-empty {
+  margin-top: 8px;
+  color: var(--muted);
+}
