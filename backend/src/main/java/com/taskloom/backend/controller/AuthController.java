@@ -1,5 +1,6 @@
 package com.taskloom.backend.controller;
 
+import com.taskloom.backend.dto.AuthResponse;
 import com.taskloom.backend.service.AuthService;
 import com.taskloom.backend.dto.AuthRequest;
 
@@ -22,8 +23,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody AuthRequest request) {
-        boolean success = authService.login(request);
-        return success ? "Login success" : "Invalid credentials";
+    public AuthResponse login(@RequestBody AuthRequest request) {
+        String email = authService.login(request);
+        return new AuthResponse(null, email); // token later (JWT)
     }
+
 }

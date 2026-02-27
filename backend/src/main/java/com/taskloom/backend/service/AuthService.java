@@ -31,10 +31,17 @@ public class AuthService {
         userRepo.save(user);
     }
 
-    public boolean login(AuthRequest request) {
+    public String login(AuthRequest request) {
         User user = userRepo.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        return encoder.matches(request.getPassword(), user.getPassword());
+        boolean match = encoder.matches(request.getPassword(), user.getPassword());
+
+        if (!match) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return user.getEmail();
     }
+
 }
