@@ -25,4 +25,11 @@ public class GlobalExceptionHandler {
                 .body("Something went wrong");
     }
 
+    @ExceptionHandler(InvalidPasswordException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String handleInvalidPassword(InvalidPasswordException ex) {
+        return ex.getMessage();
+    }
+
+
 }

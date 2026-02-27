@@ -6,6 +6,7 @@ import com.taskloom.backend.dto.AuthRequest;
 
 import com.taskloom.backend.exception.UserAlreadyExistsException;
 import com.taskloom.backend.exception.UserNotFoundException;
+import com.taskloom.backend.exception.InvalidPasswordException;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,11 +36,10 @@ public class AuthService {
         User user = userRepo.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        boolean match = encoder.matches(request.getPassword(), user.getPassword());
-
-        if (!match) {
-            throw new RuntimeException("Invalid password");
+        if (!encoder.matches(request.getPassword(), user.getPassword())) {
+            throw new InvalidPasswordException("Wrong password");
         }
+
 
         return user.getEmail();
     }
