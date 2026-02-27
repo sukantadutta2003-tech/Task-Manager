@@ -4,6 +4,9 @@ import com.taskloom.backend.entity.User;
 import com.taskloom.backend.repository.UserRepository;
 import com.taskloom.backend.dto.AuthRequest;
 
+import com.taskloom.backend.exception.UserAlreadyExistsException;
+import com.taskloom.backend.exception.UserNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,7 @@ public class AuthService {
 
     public void register(AuthRequest request) {
         if (userRepo.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email exists");
+            throw new UserAlreadyExistsException("Email already registered");
         }
 
         User user = new User();
@@ -30,7 +33,7 @@ public class AuthService {
 
     public boolean login(AuthRequest request) {
         User user = userRepo.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         return encoder.matches(request.getPassword(), user.getPassword());
     }
