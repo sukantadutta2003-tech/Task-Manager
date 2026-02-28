@@ -3,7 +3,6 @@ import "./login.css";
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 
 function Login() {
-  // 🔥 State (NEW)
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -26,7 +25,7 @@ function Login() {
     };
   }, []);
 
-  // 🔐 LOGIN HANDLER
+  //LOGIN HANDLER
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -48,7 +47,7 @@ function Login() {
 
       const data = JSON.parse(text);
 
-      // TEMP storage (later JWT)
+      // TEMP storage
       localStorage.setItem("userEmail", data.email);
 
       alert("Login successful!");
@@ -58,7 +57,7 @@ function Login() {
     }
   };
 
-  // 📝 REGISTER HANDLER
+  //REGISTER HANDLER
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -155,7 +154,7 @@ function Login() {
           </form>
         </div>
 
-        {/* OVERLAY (UNCHANGED) */}
+        {/* OVERLAY */}
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
