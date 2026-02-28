@@ -83,12 +83,12 @@ function Login() {
 
             <input
               type="text"
-              placeholder="Name"
+              placeholder="Username"
               onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email id"
               onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
             />
             <input
@@ -114,7 +114,7 @@ function Login() {
 
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email id"
               onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
             />
             <input
