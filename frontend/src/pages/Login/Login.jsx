@@ -4,7 +4,7 @@ import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 
 function Login() {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [signupData, setSignupData] = useState({ name: "", email: "", password: "" });
+  const [signupData, setSignupData] = useState({ username: "", email: "", password: "" });
 
   useEffect(() => {
     const signInButton = document.getElementById("signIn");
@@ -84,7 +84,7 @@ function Login() {
             <input
               type="text"
               placeholder="Username"
-              onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
+              onChange={(e) => setSignupData({ ...signupData, username: e.target.value })}
             />
             <input
               type="email"
