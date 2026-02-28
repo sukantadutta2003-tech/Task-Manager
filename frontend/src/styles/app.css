@@ -361,3 +361,15 @@ body {
 .task-card::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
+
+.avatar-circle {
+  width: 35px;
+  height: 35px;
+  background: #6c63ff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}

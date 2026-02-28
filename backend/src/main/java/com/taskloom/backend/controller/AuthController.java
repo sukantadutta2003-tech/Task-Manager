@@ -24,8 +24,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
-        String email = authService.login(request);
-        return new AuthResponse(null, email); // token later (JWT)
+        String token = authService.login(request);
+        return new AuthResponse(token, request.getEmail());
     }
 
 }

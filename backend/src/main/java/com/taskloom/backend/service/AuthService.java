@@ -8,6 +8,8 @@ import com.taskloom.backend.exception.UserAlreadyExistsException;
 import com.taskloom.backend.exception.UserNotFoundException;
 import com.taskloom.backend.exception.InvalidPasswordException;
 
+import com.taskloom.backend.security.JwtService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,7 @@ public class AuthService {
         userRepo.save(user);
     }
 
+    private final JwtService jwtService;
     public String login(AuthRequest request) {
         User user = userRepo.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -41,7 +44,7 @@ public class AuthService {
         }
 
 
-        return user.getEmail();
+        return jwtService.generateToken(user.getEmail());
     }
 
 }

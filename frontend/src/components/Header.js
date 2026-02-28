@@ -1,7 +1,24 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
   const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const email = localStorage.getItem("email");
+
+    if (token && email) {
+      setUserEmail(email);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    window.location.reload();
+  };
 
   return (
     <header className="topbar">
@@ -26,11 +43,22 @@ function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
         />
       </div>
 
-      {/* RIGHT — Login Button */}
+      {/* RIGHT — Login / Avatar */}
       <div className="topbar-right">
-        <button className="login-btn" onClick={() => navigate("/login")}>
-          Login
-        </button>
+        {!userEmail ? (
+          <button className="login-btn" onClick={() => navigate("/login")}>
+            Login
+          </button>
+        ) : (
+          <div className="avatar-container" title={userEmail}>
+            <div
+              className="avatar-circle"
+              onClick={handleLogout}
+            >
+              {userEmail.charAt(0).toUpperCase()}
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

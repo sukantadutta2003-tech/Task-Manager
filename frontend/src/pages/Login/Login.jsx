@@ -3,94 +3,76 @@ import "./login.css";
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 
 function Login() {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [signupData, setSignupData] = useState({ name: "", email: "", password: "" });
 
-  const [registerName, setRegisterName] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-
-  // UI animation (UNCHANGED)
   useEffect(() => {
     const signInButton = document.getElementById("signIn");
     const signUpButton = document.getElementById("signUp");
     const container = document.getElementById("container");
 
-    signUpButton.onclick = () => {
-      container.classList.add("right-panel-active");
-    };
-
-    signInButton.onclick = () => {
-      container.classList.remove("right-panel-active");
-    };
+    signUpButton.onclick = () => container.classList.add("right-panel-active");
+    signInButton.onclick = () => container.classList.remove("right-panel-active");
   }, []);
 
-  //LOGIN HANDLER
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  // ================= LOGIN =================
+  const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const res = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginEmail,
-          password: loginPassword,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
       });
 
-      const text = await response.text();
+      const data = await res.json();
 
-      if (!response.ok) throw new Error(text);
+      if (!res.ok) {
+        alert(data.message || "Login failed");
+        return;
+      }
 
-      const data = JSON.parse(text);
-
-      // TEMP storage
-      localStorage.setItem("userEmail", data.email);
+      // SAVE JWT
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
 
       alert("Login successful!");
-      window.location.href = "/"; // redirect to main app
+
+      // redirect to main page later
+      window.location.href = "/";
     } catch (err) {
-      alert(err.message);
+      console.error(err);
+      alert("Server error");
     }
   };
 
-  //REGISTER HANDLER
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
+  // ================= REGISTER =================
+  const handleSignup = async () => {
     try {
-      const response = await fetch("http://localhost:8080/auth/register", {
+      const res = await fetch("http://localhost:8080/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: registerEmail,
-          password: registerPassword,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signupData),
       });
 
-      const text = await response.text();
+      if (!res.ok) {
+        const text = await res.text();
+        alert(text);
+        return;
+      }
 
-      if (!response.ok) throw new Error(text);
-
-      alert("Registration successful! Please login.");
-      document.getElementById("signIn").click(); // switch panel
+      alert("Account created! Please login.");
     } catch (err) {
-      alert(err.message);
+      console.error(err);
+      alert("Server error");
     }
   };
 
   return (
     <div className="login-page">
       <div className="container" id="container">
-
         {/* SIGN UP */}
         <div className="form-container sign-up-container">
-          <form onSubmit={handleRegister}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <h1>Create Account</h1>
             <div className="social-container">
               <a href="#" className="social"><FaFacebookF /></a>
@@ -102,31 +84,26 @@ function Login() {
             <input
               type="text"
               placeholder="Name"
-              value={registerName}
-              onChange={(e) => setRegisterName(e.target.value)}
+              onChange={(e) => setSignupData({ ...signupData, name: e.target.value })}
             />
-
             <input
               type="email"
               placeholder="Email"
-              value={registerEmail}
-              onChange={(e) => setRegisterEmail(e.target.value)}
+              onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
             />
-
             <input
               type="password"
               placeholder="Password"
-              value={registerPassword}
-              onChange={(e) => setRegisterPassword(e.target.value)}
+              onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
             />
 
-            <button type="submit">Sign Up</button>
+            <button type="button" onClick={handleSignup}>Sign Up</button>
           </form>
         </div>
 
         {/* SIGN IN */}
         <div className="form-container sign-in-container">
-          <form onSubmit={handleLogin}>
+          <form onSubmit={(e) => e.preventDefault()}>
             <h1>Sign in</h1>
             <div className="social-container">
               <a href="#" className="social"><FaFacebookF /></a>
@@ -138,19 +115,16 @@ function Login() {
             <input
               type="email"
               placeholder="Email"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
+              onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
             />
-
             <input
               type="password"
               placeholder="Password"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
+              onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
             />
 
             <a href="#">Forgot your password?</a>
-            <button type="submit">Sign In</button>
+            <button type="button" onClick={handleLogin}>Sign In</button>
           </form>
         </div>
 
@@ -159,7 +133,7 @@ function Login() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back</h1>
-              <p>Already have an account? <br/>Login here</p>
+              <p>Already have an account? <br />Login here</p>
               <button className="ghost" id="signIn">Sign In</button>
             </div>
 
@@ -170,7 +144,6 @@ function Login() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
