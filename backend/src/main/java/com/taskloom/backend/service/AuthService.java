@@ -8,7 +8,7 @@ import com.taskloom.backend.exception.UserAlreadyExistsException;
 import com.taskloom.backend.exception.UserNotFoundException;
 import com.taskloom.backend.exception.InvalidPasswordException;
 
-import com.taskloom.backend.security.JwtService;
+import com.taskloom.backend.security.jwt.JwtService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
