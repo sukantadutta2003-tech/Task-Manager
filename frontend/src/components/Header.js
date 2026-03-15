@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -14,9 +16,21 @@ function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
     }
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    setDropdownOpen(false);
     window.location.reload();
   };
 
@@ -50,13 +64,25 @@ function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
             Login
           </button>
         ) : (
-          <div className="avatar-container" title={userEmail}>
+          <div className="avatar-container" ref={dropdownRef}>
             <div
               className="avatar-circle"
-              onClick={handleLogout}
+              onClick={() => setDropdownOpen(!dropdownOpen)}
             >
               {userEmail.charAt(0).toUpperCase()}
             </div>
+
+            {dropdownOpen && (
+              <div className="avatar-dropdown">
+                <div className="dropdown-item dropdown-label">My Account</div>
+                <div className="dropdown-item">Settings</div>
+                <div className="dropdown-item">Support</div>
+                <div className="dropdown-divider" />
+                <button className="dropdown-logout" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
