@@ -4,6 +4,7 @@ import com.taskloom.backend.task.dto.TaskRequest;
 import com.taskloom.backend.task.dto.TaskResponse;
 import com.taskloom.backend.task.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -25,5 +26,18 @@ public class TaskController {
     @GetMapping
     public List<TaskResponse> getTasks(Principal principal) {
         return taskService.getUserTasks(principal.getName());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(Principal principal,
+                                           @PathVariable Long id) {
+        taskService.deleteTask(principal.getName(), id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/complete")
+    public TaskResponse toggleComplete(Principal principal,
+                                       @PathVariable Long id) {
+        return taskService.toggleComplete(principal.getName(), id);
     }
 }

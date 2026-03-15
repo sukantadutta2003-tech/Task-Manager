@@ -6,6 +6,7 @@ import "./styles/theme.css";
 import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
+import { fetchTasks, createTask, deleteTaskApi, toggleCompleteApi } from "./api";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -21,40 +22,99 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  const handleAddTask = (e) => {
-    if (e.key === "Enter" && inputValue.trim()) {
-      const newTask = {
-        text: inputValue.trim(),
-        view: activeView, // store section
-      };
+  // Load tasks from backend on mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return; // not logged in, skip
 
-      setTasks([...tasks, newTask]);
+    fetchTasks()
+      .then((allTasks) => {
+        setTasks(allTasks.filter((t) => !t.completed));
+        setCompleted(allTasks.filter((t) => t.completed));
+      })
+      .catch((err) => console.error("Failed to load tasks:", err));
+  }, []);
+
+  const handleAddTask = async (e) => {
+    if (e.key === "Enter" && inputValue.trim()) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        // Logged in → save to database
+        try {
+          const savedTask = await createTask(inputValue.trim(), activeView);
+          setTasks((prev) => [...prev, savedTask]);
+        } catch (err) {
+          console.error("Failed to create task:", err);
+        }
+      } else {
+        // Not logged in → local state only
+        const newTask = {
+          id: Date.now(),
+          title: inputValue.trim(),
+          view: activeView,
+        };
+        setTasks((prev) => [...prev, newTask]);
+      }
+
       setInputValue("");
       setShowInput(false);
     }
   };
 
-  const markCompleted = (index) => {
+  const markCompleted = async (index) => {
     const task = filteredTasks[index];
+    const token = localStorage.getItem("token");
 
-    setTasks(tasks.filter((t) => t !== task));
-    setCompleted([...completed, task]);
+    if (token && task.id) {
+      try {
+        await toggleCompleteApi(task.id);
+      } catch (err) {
+        console.error("Failed to complete task:", err);
+        return;
+      }
+    }
+
+    setTasks((prev) => prev.filter((t) => t.id !== task.id));
+    setCompleted((prev) => [...prev, { ...task, completed: true }]);
   };
 
-  // 🗑️ DELETE HANDLERS
-  const deleteTask = (index) => {
+  const deleteTask = async (index) => {
     const task = filteredTasks[index];
-    setTasks(tasks.filter((t) => t !== task));
+    const token = localStorage.getItem("token");
+
+    if (token && task.id) {
+      try {
+        await deleteTaskApi(task.id);
+      } catch (err) {
+        console.error("Failed to delete task:", err);
+        return;
+      }
+    }
+
+    setTasks((prev) => prev.filter((t) => t.id !== task.id));
   };
 
-  const deleteCompletedTask = (index) => {
-    setCompleted(completed.filter((_, i) => i !== index));
+  const deleteCompletedTask = async (index) => {
+    const task = completed[index];
+    const token = localStorage.getItem("token");
+
+    if (token && task.id) {
+      try {
+        await deleteTaskApi(task.id);
+      } catch (err) {
+        console.error("Failed to delete task:", err);
+        return;
+      }
+    }
+
+    setCompleted((prev) => prev.filter((_, i) => i !== index));
   };
 
   const filteredTasks = tasks.filter(
     (task) =>
       task.view === activeView &&
-      task.text.toLowerCase().includes(search.toLowerCase()),
+      (task.title || task.text || "").toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -63,7 +123,7 @@ function App() {
         {/* LOGIN PAGE */}
         <Route path="/login" element={<Login />} />
 
-        {/* MAIN APP — YOUR ORIGINAL LAYOUT (UNCHANGED) */}
+        {/* MAIN APP */}
         <Route
           path="/"
           element={
@@ -89,7 +149,6 @@ function App() {
                   </div>
                   <div className="task-card">
                     <div className="task-card-header">
-                      {/* <h2>{activeView}</h2> */}
                       <button
                         className="add-btn"
                         onClick={() => setShowInput(!showInput)}
@@ -114,12 +173,12 @@ function App() {
                     )}
 
                     {filteredTasks.map((task, index) => (
-                      <div key={index} className="task-item">
+                      <div key={task.id} className="task-item">
                         <span
                           className="task-checkbox"
                           onClick={() => markCompleted(index)}
                         />
-                        <span className="task-text">{task.text}</span>
+                        <span className="task-text">{task.title || task.text}</span>
 
                         <button
                           className="task-delete"
@@ -142,9 +201,9 @@ function App() {
                     )}
 
                     {completed.map((task, index) => (
-                      <div key={index} className="task-item completed">
+                      <div key={task.id} className="task-item completed">
                         <span className="task-checkbox checked" />
-                        <span className="task-text">{task.text}</span>
+                        <span className="task-text">{task.title || task.text}</span>
 
                         <button
                           className="task-delete"
@@ -157,7 +216,6 @@ function App() {
                   </div>
                 </main>
               </div>
-              {/* 👆 END OF YOUR ORIGINAL LAYOUT */}
             </>
           }
         />

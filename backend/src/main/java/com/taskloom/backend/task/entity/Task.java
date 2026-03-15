@@ -6,7 +6,9 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tasks")
+@Table(name = "tasks", indexes = {
+        @Index(name = "idx_tasks_user_id", columnList = "user_id")
+})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,6 +23,7 @@ public class Task {
     private String title;
     private String description;
     private boolean completed;
+    private String view;
 
     private LocalDateTime createdAt;
 

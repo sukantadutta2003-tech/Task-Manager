@@ -21,18 +21,18 @@ public class TaskService {
 
     public TaskResponse createTask(String email, TaskRequest request) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         Task task = Task.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
+                .view(request.getView())
                 .completed(false)
                 .createdAt(LocalDateTime.now())
                 .user(user)
                 .build();
 
         Task saved = taskRepository.save(task);
-
         return mapToResponse(saved);
     }
 
@@ -43,12 +43,38 @@ public class TaskService {
                 .toList();
     }
 
+    public void deleteTask(String email, Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        if (!task.getUser().getEmail().equals(email)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        taskRepository.delete(task);
+    }
+
+    public TaskResponse toggleComplete(String email, Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        if (!task.getUser().getEmail().equals(email)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        task.setCompleted(!task.isCompleted());
+        Task saved = taskRepository.save(task);
+        return mapToResponse(saved);
+    }
+
     private TaskResponse mapToResponse(Task task) {
         return TaskResponse.builder()
                 .id(task.getId())
                 .title(task.getTitle())
                 .description(task.getDescription())
                 .completed(task.isCompleted())
+                .view(task.getView())
+                .createdAt(task.getCreatedAt() != null ? task.getCreatedAt().toString() : null)
                 .build();
     }
 }

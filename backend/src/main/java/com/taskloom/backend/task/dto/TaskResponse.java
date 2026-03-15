@@ -10,4 +10,6 @@ public class TaskResponse {
     private String title;
     private String description;
     private boolean completed;
+    private String view;
+    private String createdAt;
 }
