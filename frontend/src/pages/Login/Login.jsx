@@ -38,7 +38,7 @@ function Login() {
       alert("Login successful!");
 
       // redirect to main page later
-      window.location.href = "/";
+      window.location.href = "/app";
     } catch (err) {
       console.error(err);
       alert("Server error");

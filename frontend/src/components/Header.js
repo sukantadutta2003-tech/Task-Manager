@@ -32,7 +32,7 @@ function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
     setDropdownOpen(false);
-    window.location.reload();
+    window.location.href = "/";
   };
 
   return (
