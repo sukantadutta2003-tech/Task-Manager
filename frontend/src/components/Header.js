@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { FiUser } from "react-icons/fi";
 
 function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
   const navigate = useNavigate();
@@ -60,8 +61,8 @@ function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
       {/* RIGHT — Login / Avatar */}
       <div className="topbar-right">
         {!userEmail ? (
-          <button className="login-btn" onClick={() => navigate("/login")}>
-            Login
+          <button className="login-icon-btn" onClick={() => navigate("/login")}>
+            <FiUser />
           </button>
         ) : (
           <div className="avatar-container" ref={dropdownRef}>
