@@ -5,18 +5,10 @@
 
 body {
   margin: 0;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
 }
-/* body > div {
-  display: flex;
-  flex-direction: column;
-} */
 
 .app {
   display: flex;
@@ -27,8 +19,7 @@ body {
 .sidebar {
   width: 240px;
   background: var(--bg);
-  /* border-right: 1px solid var(--border); */
-  padding: 0px 8px;
+  padding: 0 8px;
   overflow: hidden;
   transition: width 0.25s ease;
 }
@@ -37,7 +28,6 @@ body {
   width: 72px;
 }
 
-/* ================== SIDEBAR TOP ================== */
 .sidebar-top {
   position: relative;
   height: 40px;
@@ -47,7 +37,6 @@ body {
 .hamburger-btn {
   left: 14px;
   top: 50%;
-  /* transform: translateY(-50%); */
   font-size: 22px;
   background: none;
   border: none;
@@ -59,20 +48,17 @@ body {
   color: #ffffff;
 }
 
-/* ================== DIVIDER ================== */
 .sidebar-divider {
   height: 1px;
   background: var(--border);
   margin: 2px 0 12px;
 }
 
-/* ================== SECTIONS ================== */
 .sidebar-section {
   margin-top: 12px;
-  overflow: hidden; /* 🔒 stops reflow glitch */
+  overflow: hidden;
 }
 
-/* ================== TITLES ================== */
 .sidebar-title {
   font-size: 20px;
   color: var(--text);
@@ -88,12 +74,11 @@ body {
   display: none;
 }
 
-/* ================== SIDEBAR ITEMS ================== */
 .sidebar-item {
   position: relative;
   display: flex;
   align-items: center;
-  height: 40px; /* 🔒 fixed height */
+  height: 40px;
   padding-left: 56px;
   padding-right: 12px;
   border-radius: 8px;
@@ -102,7 +87,6 @@ body {
   white-space: nowrap;
 }
 
-/* ICON — fixed column (never moves) */
 .sidebar-item svg {
   position: absolute;
   left: 20px;
@@ -111,48 +95,39 @@ body {
   font-size: 18px;
 }
 
-/* LABEL — animated only */
 .sidebar-item span {
   display: inline-block;
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease;
   transform-origin: left center;
 }
 
-/* Hover & active */
 .sidebar-item:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-item.active {
   background: rgba(0, 0, 0, 0.15);
-  /* color: #ffffff; */
 }
 
-/* ================== COLLAPSED (GMAIL BEHAVIOR) ================== */
 .sidebar.collapsed .sidebar-item span {
   opacity: 0;
   transform: translateX(-8px);
   pointer-events: none;
 }
 
-/* ================== CUSTOM LISTS (SMOOTH, NO JUMP) ================== */
+/* ================== CUSTOM LISTS ================== */
 .custom-lists {
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition:
-    max-height 0.35s ease,
-    opacity 0.25s ease;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
 }
 
 .custom-lists.open {
-  max-height: 500px; /* safe upper bound */
+  max-height: 500px;
   opacity: 1;
 }
 
-/* Create custom list */
 .sidebar-create {
   padding-left: 56px;
   font-size: 14px;
@@ -165,54 +140,28 @@ body {
   color: var(--accent);
 }
 
-/* ================== SIDE-BY-SIDE TASK COLUMNS ================== */
-.tasks-columns {
-  display: flex;
-  gap: 16px;
-  padding: 0 16px;
-  align-items: flex-start;
-}
-
-.tasks-col {
-  flex: 2;
-}
-
-.tasks-col.completed-col {
-  flex: 1;
-}
-
-.col-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 8px 0;
-  padding: 0;
-}
-
-@media (max-width: 768px) {
-  .tasks-columns {
-    flex-direction: column;
-  }
-}
-
-/* ================== MAIN CONTENT (UNCHANGED) ================== */
-.main {
-  flex: 1;
-  padding: 0px 0px;
-  background: var(--card);
-  border-radius: 16px;
-}
-
+/* ================== TOPBAR ================== */
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 9px 4px;
+  width: 100%;
+  padding: 12px 20px;
   gap: 16px;
+  background: var(--bg);
 }
 
-.topbar-title {
-  font-size: 18px;
+.topbar-logo {
+  font-size: 23px;
   font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0 13px;
+}
+
+.topbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .topbar-search {
@@ -223,7 +172,79 @@ body {
   background: var(--card);
   color: var(--text);
 }
-/* ================= ADD TASK INPUT ================= */
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ================== TASK LAYOUT ================== */
+.main {
+  flex: 1;
+  background: var(--card);
+  border-radius: 16px;
+}
+
+.task-header {
+  padding: 0 20px;
+  margin: 20px 0;
+}
+
+.tasks-columns {
+  display: flex;
+  gap: 16px;
+  padding: 0 16px;
+  align-items: flex-start;
+}
+
+.tasks-col {
+  flex: 1.2;
+}
+
+.tasks-col.completed-col {
+  flex: 1;
+}
+
+.col-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0 0 8px 0;
+}
+
+/* ================== TASK CARDS ================== */
+.task-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: -3px 0 10px #888888;
+  max-height: 25vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.task-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-card::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.task-card::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* ================== TASK INPUT & BUTTONS ================== */
 .task-input {
   width: 250px;
   padding: 10px 14px;
@@ -234,32 +255,7 @@ body {
   font-size: 14px;
   margin-top: 8px;
 }
-.topbar-right {
-  display: flex;
-  align-items: center;
-}
 
-/* ================== CARDS (UNCHANGED) ================== */
-.task-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  margin: 16px;
-  box-shadow: -3px 0px 10px #888888;
-  max-height: 25vh;
-  overflow-y: auto;
-  padding-right: 6px;
-}
-
-.task-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-/* ================== BUTTONS ================== */
 .add-btn {
   border-radius: 14px;
   border: 1px solid var(--border);
@@ -274,14 +270,14 @@ body {
   background: rgba(0, 0, 0, 0.05);
 }
 
-/* ================== TASKS (UNCHANGED) ================== */
+/* ================== TASK ITEMS ================== */
 .task-item {
   display: flex;
   gap: 12px;
   padding: 10px 12px;
   border-radius: 8px;
-  background: transparent;
 }
+
 .task-item:hover {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 20px;
@@ -324,6 +320,8 @@ body {
   margin-top: 8px;
   color: var(--muted);
 }
+
+/* ================== THEME TOGGLE ================== */
 .theme-toggle-btn {
   width: 36px;
   height: 36px;
@@ -332,27 +330,12 @@ body {
   background: transparent;
   font-size: 20px;
 }
+
 .theme-toggle-btn:hover {
   background: var(--accent);
 }
-/* Topbar Layout */
 
-/* Logo (like YouTube text) */
-.topbar-logo {
-  font-size: 23px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 0px 13px;
-}
-
-/* Center search stays same */
-.topbar-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-/* Right login icon */
+/* ================== LOGIN ICON ================== */
 .login-icon-btn {
   width: 36px;
   height: 36px;
@@ -371,31 +354,8 @@ body {
 .login-icon-btn:hover {
   background: rgba(0, 0, 0, 0.05);
 }
-/* HEADER FULL WIDTH FIX */
-.topbar {
-  width: 100%;
-  padding: 12px 20px;
-  /* border-bottom: 1px solid var(--border); */
-  background: var(--bg);
-}
 
-.task-header {
-  padding: 0px 20px;
-  margin: 20px 0px;
-}
-.task-card::-webkit-scrollbar {
-  width: 6px;
-}
-
-.task-card::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-}
-
-.task-card::-webkit-scrollbar-thumb:hover {
-  background: #999;
-}
-
+/* ================== AVATAR & DROPDOWN ================== */
 .avatar-container {
   position: relative;
 }
@@ -418,7 +378,6 @@ body {
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.3);
 }
 
-/* ================== AVATAR DROPDOWN ================== */
 .avatar-dropdown {
   position: absolute;
   top: 48px;
@@ -480,7 +439,7 @@ body {
   background: #16a34a;
 }
 
-/* ================== MAIN APP RESPONSIVE ================== */
+/* ================== RESPONSIVE ================== */
 @media (max-width: 768px) {
   .sidebar {
     width: 72px;

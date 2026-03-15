@@ -7,7 +7,12 @@ import Header from "./components/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Landing from "./pages/Landing/Landing";
-import { fetchTasks, createTask, deleteTaskApi, toggleCompleteApi } from "./api";
+import {
+  fetchTasks,
+  createTask,
+  deleteTaskApi,
+  toggleCompleteApi,
+} from "./api";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -100,7 +105,9 @@ function App() {
   const filteredTasks = tasks.filter(
     (task) =>
       task.view === activeView &&
-      (task.title || task.text || "").toLowerCase().includes(search.toLowerCase()),
+      (task.title || task.text || "")
+        .toLowerCase()
+        .includes(search.toLowerCase()),
   );
 
   return (
@@ -109,13 +116,7 @@ function App() {
         {/* LANDING PAGE — for unauthenticated users */}
         <Route
           path="/"
-          element={
-            isLoggedIn ? (
-              <Navigate to="/app" replace />
-            ) : (
-              <Landing />
-            )
-          }
+          element={isLoggedIn ? <Navigate to="/app" replace /> : <Landing />}
         />
 
         {/* LOGIN PAGE */}
@@ -182,7 +183,9 @@ function App() {
                                 className="task-checkbox"
                                 onClick={() => markCompleted(index)}
                               />
-                              <span className="task-text">{task.title || task.text}</span>
+                              <span className="task-text">
+                                {task.title || task.text}
+                              </span>
 
                               <button
                                 className="task-delete"
@@ -197,7 +200,7 @@ function App() {
 
                       {/* COMPLETED TASKS */}
                       <div className="tasks-col completed-col">
-                        <h3 className="col-title">Completed Tasks</h3>
+                        <h1 className="col-title">Completed Tasks</h1>
                         <div className="task-card">
                           {completed.length === 0 && (
                             <p className="task-empty">No completed tasks</p>
@@ -206,7 +209,9 @@ function App() {
                           {completed.map((task, index) => (
                             <div key={task.id} className="task-item completed">
                               <span className="task-checkbox checked" />
-                              <span className="task-text">{task.title || task.text}</span>
+                              <span className="task-text">
+                                {task.title || task.text}
+                              </span>
 
                               <button
                                 className="task-delete"
