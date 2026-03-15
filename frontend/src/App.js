@@ -144,76 +144,80 @@ function App() {
                   />
 
                   <main className="main">
-                    {/* ACTIVE TASKS */}
                     <div className="task-header">
                       <h1>{activeView}</h1>
                     </div>
-                    <div className="task-card">
-                      <div className="task-card-header">
-                        <button
-                          className="add-btn"
-                          onClick={() => setShowInput(!showInput)}
-                        >
-                          Add Task
-                        </button>
+
+                    <div className="tasks-columns">
+                      {/* ACTIVE TASKS */}
+                      <div className="tasks-col">
+                        <div className="task-card">
+                          <div className="task-card-header">
+                            <button
+                              className="add-btn"
+                              onClick={() => setShowInput(!showInput)}
+                            >
+                              Add Task
+                            </button>
+                          </div>
+
+                          {showInput && (
+                            <input
+                              className="task-input"
+                              placeholder="Add new task..."
+                              value={inputValue}
+                              onChange={(e) => setInputValue(e.target.value)}
+                              onKeyDown={handleAddTask}
+                              autoFocus
+                            />
+                          )}
+
+                          {filteredTasks.length === 0 && (
+                            <p className="task-empty">No tasks found</p>
+                          )}
+
+                          {filteredTasks.map((task, index) => (
+                            <div key={task.id} className="task-item">
+                              <span
+                                className="task-checkbox"
+                                onClick={() => markCompleted(index)}
+                              />
+                              <span className="task-text">{task.title || task.text}</span>
+
+                              <button
+                                className="task-delete"
+                                onClick={() => deleteTask(index)}
+                              >
+                                <FiTrash2 />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
                       </div>
 
-                      {showInput && (
-                        <input
-                          className="task-input"
-                          placeholder="Add new task..."
-                          value={inputValue}
-                          onChange={(e) => setInputValue(e.target.value)}
-                          onKeyDown={handleAddTask}
-                          autoFocus
-                        />
-                      )}
+                      {/* COMPLETED TASKS */}
+                      <div className="tasks-col completed-col">
+                        <h3 className="col-title">Completed Tasks</h3>
+                        <div className="task-card">
+                          {completed.length === 0 && (
+                            <p className="task-empty">No completed tasks</p>
+                          )}
 
-                      {filteredTasks.length === 0 && (
-                        <p className="task-empty">No tasks found</p>
-                      )}
+                          {completed.map((task, index) => (
+                            <div key={task.id} className="task-item completed">
+                              <span className="task-checkbox checked" />
+                              <span className="task-text">{task.title || task.text}</span>
 
-                      {filteredTasks.map((task, index) => (
-                        <div key={task.id} className="task-item">
-                          <span
-                            className="task-checkbox"
-                            onClick={() => markCompleted(index)}
-                          />
-                          <span className="task-text">{task.title || task.text}</span>
-
-                          <button
-                            className="task-delete"
-                            onClick={() => deleteTask(index)}
-                          >
-                            <FiTrash2 />
-                          </button>
+                              <button
+                                className="task-delete"
+                                onClick={() => deleteCompletedTask(index)}
+                              >
+                                <FiTrash2 />
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-
-                    <div className="task-header">
-                      <h2>Completed Tasks</h2>
-                    </div>
-
-                    {/* COMPLETED TASKS */}
-                    <div className="task-card">
-                      {completed.length === 0 && (
-                        <p className="task-empty">No completed tasks</p>
-                      )}
-
-                      {completed.map((task, index) => (
-                        <div key={task.id} className="task-item completed">
-                          <span className="task-checkbox checked" />
-                          <span className="task-text">{task.title || task.text}</span>
-
-                          <button
-                            className="task-delete"
-                            onClick={() => deleteCompletedTask(index)}
-                          >
-                            <FiTrash2 />
-                          </button>
-                        </div>
-                      ))}
+                      </div>
                     </div>
                   </main>
                 </div>

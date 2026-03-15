@@ -165,6 +165,35 @@ body {
   color: var(--accent);
 }
 
+/* ================== SIDE-BY-SIDE TASK COLUMNS ================== */
+.tasks-columns {
+  display: flex;
+  gap: 16px;
+  padding: 0 16px;
+  align-items: flex-start;
+}
+
+.tasks-col {
+  flex: 2;
+}
+
+.tasks-col.completed-col {
+  flex: 1;
+}
+
+.col-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .tasks-columns {
+    flex-direction: column;
+  }
+}
+
 /* ================== MAIN CONTENT (UNCHANGED) ================== */
 .main {
   flex: 1;
@@ -449,4 +478,54 @@ body {
 
 .dropdown-logout:hover {
   background: #16a34a;
+}
+
+/* ================== MAIN APP RESPONSIVE ================== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 72px;
+    padding: 0 4px;
+  }
+
+  .sidebar .sidebar-title {
+    display: none;
+  }
+
+  .sidebar .sidebar-item span {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .topbar {
+    padding: 10px 12px;
+  }
+
+  .topbar-logo {
+    font-size: 18px;
+    padding: 0 6px;
+  }
+
+  .topbar-search {
+    width: 100%;
+    max-width: 300px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .task-header {
+    padding: 0 12px;
+  }
+
+  .task-header h1 {
+    font-size: 22px;
+  }
+
+  .tasks-columns {
+    flex-direction: column;
+    padding: 0 8px;
+  }
+
+  .task-card {
+    margin: 8px;
+  }
 }

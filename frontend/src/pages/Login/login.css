@@ -235,3 +235,81 @@
   height: 40px;
   width: 40px;
 }
+
+/* ================= MOBILE TOGGLE LINK ================= */
+.login-page .mobile-toggle {
+  display: none;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #666;
+}
+
+.login-page .mobile-toggle a {
+  color: #ff416c;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .login-page .container {
+    width: 92%;
+    min-height: auto;
+  }
+
+  /* Hide overlay panel on mobile */
+  .login-page .overlay-container {
+    display: none;
+  }
+
+  /* Make forms full width */
+  .login-page .form-container {
+    position: relative;
+    width: 100% !important;
+    height: auto;
+  }
+
+  .login-page .sign-in-container {
+    width: 100%;
+  }
+
+  .login-page .sign-up-container {
+    width: 100%;
+  }
+
+  /* During sign-up, hide sign-in and show sign-up */
+  .login-page .container.right-panel-active .sign-in-container {
+    transform: none;
+    display: none;
+  }
+
+  .login-page .container.right-panel-active .sign-up-container {
+    transform: none;
+    opacity: 1;
+    z-index: 5;
+    display: flex;
+  }
+
+  /* When NOT active (sign-in mode), hide sign-up */
+  .login-page .container:not(.right-panel-active) .sign-up-container {
+    display: none;
+  }
+
+  .login-page form {
+    padding: 30px 24px;
+  }
+
+  .login-page h1 {
+    font-size: 22px;
+  }
+
+  .login-page button {
+    padding: 10px 32px;
+  }
+
+  /* Show the mobile toggle link */
+  .login-page .mobile-toggle {
+    display: block;
+  }
+}

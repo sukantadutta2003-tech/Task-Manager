@@ -98,6 +98,10 @@ function Login() {
             />
 
             <button type="button" onClick={handleSignup}>Sign Up</button>
+            <p className="mobile-toggle">
+              Already have an account?{" "}
+              <a onClick={() => document.getElementById("container").classList.remove("right-panel-active")}>Sign In</a>
+            </p>
           </form>
         </div>
 
@@ -125,6 +129,10 @@ function Login() {
 
             <a href="#">Forgot your password?</a>
             <button type="button" onClick={handleLogin}>Sign In</button>
+            <p className="mobile-toggle">
+              Don't have an account?{" "}
+              <a onClick={() => document.getElementById("container").classList.add("right-panel-active")}>Sign Up</a>
+            </p>
           </form>
         </div>
 
