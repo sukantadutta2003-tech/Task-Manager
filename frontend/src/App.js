@@ -123,10 +123,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* LANDING PAGE — for unauthenticated users */}
-        <Route
-          path="/"
-          element={isLoggedIn ? <Navigate to="/app" replace /> : <Landing />}
-        />
+        <Route path="/" element={<Landing />} />
 
         {/* LOGIN PAGE */}
         <Route path="/login" element={<Login />} />
