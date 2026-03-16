@@ -456,12 +456,17 @@ body {
 
 /* ================== RESPONSIVE ================== */
 @media (max-width: 768px) {
+  .app {
+    position: relative;
+    overflow-x: hidden;
+  }
+
   /* -- Sidebar: hidden by default, slide-in overlay when open -- */
   .sidebar {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    height: 100vh;
+    bottom: 0;
     width: 260px;
     z-index: 1000;
     transform: translateX(-100%);
@@ -493,8 +498,11 @@ body {
   /* Dark backdrop behind the sidebar */
   .sidebar-overlay {
     display: none;
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.4);
     z-index: 999;
   }
