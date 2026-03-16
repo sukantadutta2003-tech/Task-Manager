@@ -17,7 +17,7 @@ body {
 
 /* ================== SIDEBAR ================== */
 .sidebar {
-  width: 240px;
+  width: 280px;
   background: var(--bg);
   padding: 0 8px;
   overflow: hidden;
@@ -199,6 +199,7 @@ body {
 
 .tasks-col {
   flex: 1.2;
+  margin-top: 12px;
 }
 
 .tasks-col.completed-col {
@@ -219,9 +220,8 @@ body {
   padding: 16px;
   margin: 16px;
   box-shadow: -3px 0 10px #888888;
-  max-height: 25vh;
+  max-height: 88vh;
   overflow-y: auto;
-  padding-right: 6px;
 }
 
 .task-card::-webkit-scrollbar {

@@ -145,15 +145,12 @@ function App() {
                   />
 
                   <main className="main">
-                    <div className="task-header">
-                      <h1>{activeView}</h1>
-                    </div>
-
                     <div className="tasks-columns">
                       {/* ACTIVE TASKS */}
                       <div className="tasks-col">
                         <div className="task-card">
                           <div className="task-card-header">
+                            <h1 className="col-title">{activeView}</h1>
                             <button
                               className="add-btn"
                               onClick={() => setShowInput(!showInput)}
@@ -200,8 +197,8 @@ function App() {
 
                       {/* COMPLETED TASKS */}
                       <div className="tasks-col completed-col">
-                        <h1 className="col-title">Completed Tasks</h1>
                         <div className="task-card">
+                          <h1 className="col-title">Completed Tasks</h1>
                           {completed.length === 0 && (
                             <p className="task-empty">No completed tasks</p>
                           )}
