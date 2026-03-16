@@ -486,8 +486,12 @@ body {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     background: var(--bg);
-    padding: 16px 8px;
+    padding: 0 8px;
     box-shadow: none;
+  }
+
+  .sidebar .sidebar-divider:first-child {
+    display: none;
   }
 
   .sidebar.open {
