@@ -45,7 +45,13 @@ function Header({ search, setSearch, sidebarOpen, setSidebarOpen }) {
         >
           ☰
         </button>
-        <span className="topbar-logo">TaskLoom</span>
+        <span
+          className="topbar-logo"
+          onClick={() => navigate("/")}
+          style={{ cursor: "pointer" }}
+        >
+          TaskLoom
+        </span>
       </div>
 
       {/* CENTER — Search */}

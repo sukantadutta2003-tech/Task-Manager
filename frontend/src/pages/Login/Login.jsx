@@ -4,7 +4,11 @@ import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 
 function Login() {
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [signupData, setSignupData] = useState({ username: "", email: "", password: "" });
+  const [signupData, setSignupData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     const signInButton = document.getElementById("signIn");
@@ -12,7 +16,8 @@ function Login() {
     const container = document.getElementById("container");
 
     signUpButton.onclick = () => container.classList.add("right-panel-active");
-    signInButton.onclick = () => container.classList.remove("right-panel-active");
+    signInButton.onclick = () =>
+      container.classList.remove("right-panel-active");
   }, []);
 
   // ================= LOGIN =================
@@ -72,66 +77,114 @@ function Login() {
       <div className="container" id="container">
         {/* SIGN UP */}
         <div className="form-container sign-up-container">
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSignup();
+            }}
+          >
             <h1>Create Account</h1>
             <div className="social-container">
-              <a href="#" className="social"><FaFacebookF /></a>
-              <a href="#" className="social"><FaGoogle /></a>
-              <a href="#" className="social"><FaLinkedinIn /></a>
+              <a href="#" className="social">
+                <FaFacebookF />
+              </a>
+              <a href="#" className="social">
+                <FaGoogle />
+              </a>
+              <a href="#" className="social">
+                <FaLinkedinIn />
+              </a>
             </div>
             <span>or use your email</span>
 
             <input
               type="text"
               placeholder="Username"
-              onChange={(e) => setSignupData({ ...signupData, username: e.target.value })}
+              onChange={(e) =>
+                setSignupData({ ...signupData, username: e.target.value })
+              }
             />
             <input
               type="email"
               placeholder="Email id"
-              onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
+              onChange={(e) =>
+                setSignupData({ ...signupData, email: e.target.value })
+              }
             />
             <input
               type="password"
               placeholder="Password"
-              onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
+              onChange={(e) =>
+                setSignupData({ ...signupData, password: e.target.value })
+              }
             />
 
-            <button type="button" onClick={handleSignup}>Sign Up</button>
+            <button type="submit">Sign Up</button>
             <p className="mobile-toggle">
               Already have an account?{" "}
-              <a onClick={() => document.getElementById("container").classList.remove("right-panel-active")}>Sign In</a>
+              <a
+                onClick={() =>
+                  document
+                    .getElementById("container")
+                    .classList.remove("right-panel-active")
+                }
+              >
+                Sign In
+              </a>
             </p>
           </form>
         </div>
 
         {/* SIGN IN */}
         <div className="form-container sign-in-container">
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin();
+            }}
+          >
             <h1>Sign in</h1>
             <div className="social-container">
-              <a href="#" className="social"><FaFacebookF /></a>
-              <a href="#" className="social"><FaGoogle /></a>
-              <a href="#" className="social"><FaLinkedinIn /></a>
+              <a href="#" className="social">
+                <FaFacebookF />
+              </a>
+              <a href="#" className="social">
+                <FaGoogle />
+              </a>
+              <a href="#" className="social">
+                <FaLinkedinIn />
+              </a>
             </div>
             <span>or use your account</span>
 
             <input
               type="email"
               placeholder="Email id"
-              onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+              onChange={(e) =>
+                setLoginData({ ...loginData, email: e.target.value })
+              }
             />
             <input
               type="password"
               placeholder="Password"
-              onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+              onChange={(e) =>
+                setLoginData({ ...loginData, password: e.target.value })
+              }
             />
 
             <a href="#">Forgot your password?</a>
-            <button type="button" onClick={handleLogin}>Sign In</button>
+            <button type="submit">Sign In</button>
             <p className="mobile-toggle">
               Don't have an account?{" "}
-              <a onClick={() => document.getElementById("container").classList.add("right-panel-active")}>Sign Up</a>
+              <a
+                onClick={() =>
+                  document
+                    .getElementById("container")
+                    .classList.add("right-panel-active")
+                }
+              >
+                Sign Up
+              </a>
             </p>
           </form>
         </div>
@@ -141,14 +194,21 @@ function Login() {
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>Welcome Back</h1>
-              <p>Already have an account? <br />Login here</p>
-              <button className="ghost" id="signIn">Sign In</button>
+              <p>
+                Already have an account? <br />
+                Login here
+              </p>
+              <button className="ghost" id="signIn">
+                Sign In
+              </button>
             </div>
 
             <div className="overlay-panel overlay-right">
               <h1>Don't have an account?</h1>
               <p>Register here to get started</p>
-              <button className="ghost" id="signUp">Sign Up</button>
+              <button className="ghost" id="signUp">
+                Sign Up
+              </button>
             </div>
           </div>
         </div>

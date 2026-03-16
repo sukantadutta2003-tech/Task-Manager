@@ -221,7 +221,7 @@ body {
   display: flex;
   gap: 8px;
   padding: 0 16px;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .tasks-col {
@@ -247,8 +247,7 @@ body {
   border-radius: 12px;
   padding: 16px;
   margin: 8px 8px 16px 8px;
-  box-shadow: -3px 0 10px #888888;
-  height: calc(100% - 24px);
+  min-height: 140px;
   max-height: 88vh;
   overflow-y: auto;
 }
