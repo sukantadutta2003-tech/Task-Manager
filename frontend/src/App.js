@@ -22,13 +22,22 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [search, setSearch] = useState("");
   const [activeView, setActiveView] = useState("Inbox");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 768);
 
   const isLoggedIn = !!localStorage.getItem("token");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  // Auto-close sidebar when resizing to mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) setSidebarOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Load tasks from backend on mount
   useEffect(() => {
@@ -139,9 +148,17 @@ function App() {
                 <div className="app">
                   <Sidebar
                     activeView={activeView}
-                    setActiveView={setActiveView}
+                    setActiveView={(view) => {
+                      setActiveView(view);
+                      if (window.innerWidth <= 768) setSidebarOpen(false);
+                    }}
                     sidebarOpen={sidebarOpen}
                     setSidebarOpen={setSidebarOpen}
+                  />
+                  {/* Dark overlay behind sidebar on mobile */}
+                  <div
+                    className={`sidebar-overlay ${sidebarOpen ? "visible" : ""}`}
+                    onClick={() => setSidebarOpen(false)}
                   />
 
                   <main className="main">
