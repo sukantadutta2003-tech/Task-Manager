@@ -23,7 +23,7 @@ function Login() {
   // ================= LOGIN =================
   const handleLogin = async () => {
     try {
-      const res = await fetch("http://localhost:8080/auth/login", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8080"}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
@@ -53,7 +53,7 @@ function Login() {
   // ================= REGISTER =================
   const handleSignup = async () => {
     try {
-      const res = await fetch("http://localhost:8080/auth/register", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8080"}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupData),
